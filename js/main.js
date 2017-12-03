@@ -1,8 +1,10 @@
 "use strict";
 
 function searchWord(){
+  $('.highlighted').contents().unwrap();
+
   $(".definition").each(function(index, definitionDiv){
-    var show = divContainsWord(definitionDiv);
+    var show = dictionaryItemContainsWord(definitionDiv, $("#search").val());
 
     if(show==true){
       definitionDiv.style.display = "block";
@@ -12,14 +14,32 @@ function searchWord(){
   });
 }
 
-function divContainsWord(definitionDiv){
-  var rawText = $(definitionDiv).text().toLowerCase();
-  var searchWord = $('#search').val().toLowerCase();
+function dictionaryItemContainsWord(dictionaryItem, searchWord){
+  var wordItem = $(dictionaryItem).children().first();
+  var definitionItem = $(dictionaryItem).children().last();
 
-  if(rawText.indexOf(searchWord)<0){
-    return false;
+  if(divContains(wordItem, searchWord) || divContains(definitionItem, searchWord)){
+    return true;
   }
-  return true;
+  return false;
+}
+
+function divContains(item, searchWord){
+  var contains = false;
+  var string = item.text();
+
+  for(var i = string.length-searchWord.length; i > 0 ; i--){
+    if (searchWord.toLowerCase() == string.slice(i, i+searchWord.length).toLowerCase()){
+      console.log("search word:" + searchWord + " string:" + string);
+      contains = true;
+
+      string = [string.slice(0, i), "<span class='highlighted'>", string.slice(i)].join("");
+      string = [string.slice(0, i+searchWord.length+26), "</span>", string.slice(i+searchWord.length+26)].join("");
+    }
+  }
+  $(item).html(string);
+
+  return contains;
 }
 
 function generateDefinitions()
@@ -38,7 +58,4 @@ function generateDefinitions()
 
       dictionary.innerHTML = dictionary.innerHTML + definitionText
     }
-
-
-
 }
