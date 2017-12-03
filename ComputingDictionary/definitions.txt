@@ -1,3 +1,0 @@
-Binary:1's and 0's representing all data within a computer system.
-ASCII:The coding system a computer uses to represent characters.
-Computing:The subject about computers and computery stuff.
