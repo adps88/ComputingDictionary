@@ -23,6 +23,17 @@ describe('app test', function () {
         });
     });
 
+    it('responds to /definitions', function testSlash(done) {
+        request(server).get('/definitions').expect(200).end((err, res) => {
+            expect(res.body).to.deep.equal({
+                "Binary": "1's and 0's representing all data within a computer system.",
+                "ASCII": "The coding system a computer uses to represent characters.",
+                "Computing": "The subject about computers and computery stuff."
+            });
+            done();
+        });
+    });
+
     it('404 everything else', function testPath(done) {
         request(server).get('/foo/bar').expect(404, done);
     });
