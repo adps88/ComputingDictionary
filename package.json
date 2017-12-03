@@ -1,0 +1,12 @@
+{
+  "name": "ComputingDictionary",
+  "version": "0.1.0",
+  "description": "Web app to search Computer Science terms for GCSE and A-Level",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.16.2"
+  },
+  "author": "Andrew Shaw"
+}
