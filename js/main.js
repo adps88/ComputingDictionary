@@ -18,10 +18,8 @@ function dictionaryItemContainsWord(dictionaryItem, searchWord){
   var wordItem = $(dictionaryItem).children().first();
   var definitionItem = $(dictionaryItem).children().last();
 
-  if(divContains(wordItem, searchWord) || divContains(definitionItem, searchWord)){
-    return true;
-  }
-  return false;
+  return divContains(wordItem, searchWord) || divContains(definitionItem, searchWord);
+  
 }
 
 function divContains(item, searchWord){
